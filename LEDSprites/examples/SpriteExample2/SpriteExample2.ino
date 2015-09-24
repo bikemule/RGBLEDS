@@ -1,17 +1,20 @@
+#define FASTLED_ALLOW_INTERRUPTS 0
 #include <FastLED.h>
 
 #include <LEDMatrix.h>
 #include <LEDSprites.h>
 
+
 // Change the next 6 defines to match your matrix type and size
 
-#define LED_PIN        2
+#define LED_PIN        6
 #define COLOR_ORDER    GRB
-#define CHIPSET        WS2812B
+#define CHIPSET        WS2811_400
 
-#define MATRIX_WIDTH   80
-#define MATRIX_HEIGHT  10
-#define MATRIX_TYPE    HORIZONTAL_MATRIX
+#define MATRIX_WIDTH   -40
+#define MATRIX_HEIGHT  7
+#define MATRIX_TYPE    HORIZONTAL_ZIGZAG_MATRIX
+#define BRIGHTNESS     15
 
 cLEDMatrix<MATRIX_WIDTH, MATRIX_HEIGHT, MATRIX_TYPE> leds;
 
@@ -66,7 +69,7 @@ cSprite Shape(SHAPE_WIDTH, SHAPE_HEIGHT, ShapeData, 1, _1BIT, ShapeColTable, Sha
 void setup()
 {
   FastLED.addLeds<CHIPSET, LED_PIN, COLOR_ORDER>(leds[0], leds.Size());
-  FastLED.setBrightness(64);
+  FastLED.setBrightness(BRIGHTNESS);
   FastLED.clear(true);
   delay(500);
   FastLED.showColor(CRGB::Red);
